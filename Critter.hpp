@@ -1,10 +1,13 @@
 
 #ifndef CRITTER_HPP
 #define CRITTER_HPP
+#include <vector>
 
 enum critterType {ANT, DOODLEBUG};
 enum spaceType {ANT_SPACE, DOODLEBUG_SPACE, EMPTY, OUTOFBOUNDS};
 enum direction {NONE=-1, UP, RIGHT, DOWN, LEFT};
+
+using std::vector;
 
 class Critter {
 public:
@@ -23,8 +26,8 @@ public:
     void incEat();  //  Increments stepsSinceEat.
     void resetEat();  //  Sets stepsSinceEat to 0.
     critterType getCritterType();
-    virtual bool move(){};
-    virtual direction breed()=0;
+	virtual bool move() {};
+    virtual direction breed(vector<spaceType>)=0;
     virtual bool starve()= 0;
     virtual ~Critter(){};
 

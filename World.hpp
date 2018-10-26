@@ -2,6 +2,9 @@
 #define WORLD_H
 
 #include "Critter.hpp"
+#include <vector>
+
+using std::vector;
 
 class World
 {
@@ -11,6 +14,8 @@ class World
 		int numDoodles;
 		int nRow;
 		int nCol;
+		vector<spaceType> adjacents; //to hold all adjacent spaces (0-up, 1-r, 2-d, 3-l)
+		direction breedDir;
 	public: 
 		World(int nr=20, int nc=20, int na=100, int nd=5); //WIP
 		~World(); 
@@ -21,7 +26,7 @@ class World
 		void starveCritters(); //WIP
 		void printGrid(); 
 		void runSim(int nSteps); //WIP
-
+		void setAdjacent(int, int);
 };
 
 

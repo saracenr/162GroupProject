@@ -8,8 +8,8 @@
 class Doodlebug: public Critter {
 public:
     Doodlebug(int, int);
-    bool move(spaceType*);
-    direction breed();
+    bool move(vector<spaceType>);
+    direction breed(vector<spaceType>);
     bool starve();
     ~Doodlebug(){};
 };

@@ -10,6 +10,12 @@ World::World(int nr, int nc, int na, int nd)
 	nCol=nc;
 	numAnts=na;
 	numDoodles=nd;
+	breedDir = NONE;
+
+	//initialize all out of bounds
+	for (int i = 0; i < 4; i++) {
+		adjacents.push_back(OUTOFBOUNDS);
+	}
 
 	critterSim = new Critter**[nRow];
 	for (int i=0; i<nRow; i++)
@@ -141,8 +147,93 @@ void World::resetCritters()
 
 void World::runIter(){} //WIP
 void World::moveCritters(critterType c){} //WIP
-void World::breedCritters(critterType c){} //WIP
+/*********************************************************************
+Calls each critter's breed function to get direction of breed. Sets
+new critter type in appropriate adjacent cell.
+*********************************************************************/
+void World::breedCritters(critterType c)  //WIP, incomplete
+{
+	for (int i = 0; i < nRow; i++) {
+		for (int j = 0; j < nCol; j++) {
+			if (critterSim[i][j] != nullptr) {
+				setAdjacent(i, j);
+				breedDir = critterSim[i][j]->breed(adjacents); //RJ  will pick up here later
+			}
+		}
+	}
+} 
 void World::starveCritters(){} //WIP
 void World::runSim(int nSteps){} //WIP
+
+/******************************************************************
+Checks adjacent spaces and fills vector with status of each space.
+Bounds checking function.
+*******************************************************************/
+void World::setAdjacent(int rowIn, int colIn)
+{
+	critterType type;
+	//fill adjacent vector with status of adjacent spaces
+	//above
+	if (rowIn - 1 < 0) {
+		adjacents[0] = OUTOFBOUNDS;
+	}
+	else if (critterSim[rowIn - 1][colIn] == nullptr) {
+		adjacents[0] = EMPTY;
+	}
+	else if (critterSim[rowIn - 1][colIn] != nullptr) {
+		type = critterSim[rowIn - 1][colIn]->getCritterType();
+		if (type == ANT) {
+			adjacents[0] = ANT_SPACE;
+		}
+		else if (type == DOODLEBUG) {
+			adjacents[0] = DOODLEBUG_SPACE;
+		}
+	}
+	//right
+	if (colIn + 1 > nCol) {
+		adjacents[1] = OUTOFBOUNDS;
+	}
+	else if (critterSim[rowIn][colIn + 1] == nullptr) {
+		adjacents[1] = EMPTY;
+	}
+	else if (critterSim[rowIn][colIn + 1] != nullptr) {
+		type = critterSim[rowIn][colIn + 1]->getCritterType();
+		if (type == ANT) {
+			adjacents[1] = ANT_SPACE;
+		}
+		else if (type == DOODLEBUG) {
+			adjacents[1] = DOODLEBUG_SPACE;
+		}
+	}
+	//below
+	if (rowIn + 1 > nRow) {
+		adjacents[2] = OUTOFBOUNDS;
+	}
+	else if (critterSim[rowIn + 1][colIn] == nullptr) {
+		adjacents[2] = EMPTY;
+	}
+	else if (critterSim[rowIn + 1][colIn] != nullptr) {
+		type = critterSim[rowIn + 1][colIn]->getCritterType();
+		if (type == ANT) {
+			adjacents[2] = ANT_SPACE;
+		}
+		else if (type == DOODLEBUG) {
+			adjacents[2] = DOODLEBUG_SPACE;
+		}
+	}
+	//left
+	if (colIn - 1 < 0) {
+		adjacents[3] = OUTOFBOUNDS;
+	}
+	else if (critterSim[colIn - 1][rowIn] == nullptr) {
+		adjacents[3] = EMPTY;
+	}
+	else if (critterSim[colIn - 1][rowIn]->getCritterType() == ANT) {
+		adjacents[3] = ANT_SPACE;
+	}
+	else if (critterSim[colIn - 1][rowIn]->getCritterType() == DOODLEBUG) {
+		adjacents[3] = DOODLEBUG_SPACE;
+	}
+}
 
 
