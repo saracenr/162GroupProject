@@ -1,7 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "Critter.hpp"
+#include "Doodlebug.hpp"
+#include "Ant.hpp"
 
 class World
 {
@@ -21,6 +22,7 @@ class World
 		void starveCritters(); //WIP
 		void printGrid(); 
 		void runSim(int nSteps); //WIP
+		bool inBounds(int r, int c);
 
 };
 

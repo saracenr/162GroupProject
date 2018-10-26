@@ -8,7 +8,7 @@
 class Doodlebug: public Critter {
 public:
     Doodlebug(int, int);
-    bool move(spaceType*);
+    bool move(spaceType, spaceType, spaceType, spaceType);
     direction breed();
     bool starve();
     ~Doodlebug(){};
