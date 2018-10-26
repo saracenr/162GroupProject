@@ -385,13 +385,13 @@ void World::setAdjacent(int rowIn, int colIn)
 	if (colIn - 1 < 0) {
 		adjacents[3] = OUTOFBOUNDS;
 	}
-	else if (critterSim[colIn - 1][rowIn] == nullptr) {
+	else if (critterSim[rowIn - 1][colIn] == nullptr) {
 		adjacents[3] = EMPTY;
 	}
-	else if (critterSim[colIn - 1][rowIn]->getCritterType() == ANT) {
+	else if (critterSim[rowIn - 1][colIn]->getCritterType() == ANT) {
 		adjacents[3] = ANT_SPACE;
 	}
-	else if (critterSim[colIn - 1][rowIn]->getCritterType() == DOODLEBUG) {
+	else if (critterSim[rowIn - 1][colIn]->getCritterType() == DOODLEBUG) {
 		adjacents[3] = DOODLEBUG_SPACE;
 	}
 }
