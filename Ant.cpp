@@ -65,11 +65,6 @@ bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
 	}
 }
 
-direction Ant::breed()
-{
-	return NONE;
-}
-
 /*****************************************************************
 Create new ant in an open adjacent space, if space exists.
 Returns direction of breed.

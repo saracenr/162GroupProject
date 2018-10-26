@@ -118,11 +118,6 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 	}
 }
 
-direction Doodlebug::breed()
-{
-	return NONE;
-}
-
 /****************************************************************************
 Breeds the Doodlebug. Takes adjacent spaces as parameter. Returns the 
 direction doodlebug was bred. Returns NONE if no spaces available.
