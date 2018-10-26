@@ -1,10 +1,11 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "Critter.hpp"
 #include <vector>
 
 using std::vector;
+#include "Doodlebug.hpp"
+#include "Ant.hpp"
 
 class World
 {
@@ -27,6 +28,8 @@ class World
 		void printGrid(); 
 		void runSim(int nSteps); //WIP
 		void setAdjacent(int, int);
+		bool inBounds(int r, int c);
+
 };
 
 
