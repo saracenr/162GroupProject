@@ -30,6 +30,26 @@ void Critter::resetMoved() {
     hasMovedThisTurn = false;
 }
 
+void Critter::hasMoved() {
+    hasMovedThisTurn = true;
+}
+
+void Critter::incBreed() {
+    stepsSinceBreed++;
+}
+
+void Critter::resetBreed() {
+    stepsSinceEat = 0;
+}
+
+void Critter::incEat() {
+    stepsSinceEat++;
+}
+
+void Critter::resetEat() {
+    stepsSinceEat = 0;
+}
+
 critterType Critter::getCritterType() {
     return bugType;
 }
