@@ -10,7 +10,9 @@ int main()
 
 	World w;
 	w.printGrid();
-	//w.moveCritters(DOODLEBUG);
+	for (int i = 8; i < 10; i++) {
+		w.moveCritters(DOODLEBUG);
+	}
 	w.breedCritters(DOODLEBUG);
 	w.printGrid();
 	//w.moveCritters(ANT);
