@@ -34,12 +34,20 @@ void Critter::hasMoved() {
     hasMovedThisTurn = true;
 }
 
+int Critter::getBreed() {
+    return stepsSinceBreed;
+}
+
 void Critter::incBreed() {
     stepsSinceBreed++;
 }
 
 void Critter::resetBreed() {
     stepsSinceEat = 0;
+}
+
+int Critter::getEat() {
+    return stepsSinceEat;
 }
 
 void Critter::incEat() {

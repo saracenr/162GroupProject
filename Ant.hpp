@@ -7,7 +7,7 @@
 class Ant: public Critter {
 public:
     Ant(int, int);
-    bool move();
+    bool move(spaceType*); // Checks if a random adjacent space is empty and moves there if so.
     direction breed();
     bool starve();
     ~Ant(){};

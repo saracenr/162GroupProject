@@ -16,12 +16,14 @@ public:
     void setY(int);  // Set y Coord.
     void resetMoved();  //  Sets hasMovedThisTurn to false.
     void hasMoved();  //  Sets hasMovedThisTurn to true.
+    int getBreed();  //  Returns stepsSinceBreed.
     void incBreed();  //  Increments stepsSinceBreed.
     void resetBreed();  //  Sets stepsSinceBreed to 0.
+    int getEat();  //  returns stepsSinceEat.
     void incEat();  //  Increments stepsSinceEat.
     void resetEat();  //  Sets stepsSinceEat to 0.
     critterType getCritterType();
-    virtual bool move()=0;
+    virtual bool move(){};
     virtual direction breed()=0;
     virtual bool starve()= 0;
     virtual ~Critter(){};
