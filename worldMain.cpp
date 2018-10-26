@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include "utils.hpp"
 #include <cstdlib>
 #include <random>
 #include <ctime>

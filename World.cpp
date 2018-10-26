@@ -1,7 +1,7 @@
 #include "World.hpp"
-#include "Ant.hpp"
-#include "Doodlebug.hpp"
-#include "constants.hpp"
+//#include "Ant.hpp"
+//#include "Doodlebug.hpp"
+//#include "constants.hpp"
 #include <iostream>
 
 World::World(int nr, int nc, int na, int nd)

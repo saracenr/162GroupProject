@@ -2,10 +2,7 @@
 #ifndef CRITTER_HPP
 #define CRITTER_HPP
 #include <vector>
-
-enum critterType {ANT, DOODLEBUG};
-enum spaceType {ANT_SPACE, DOODLEBUG_SPACE, EMPTY, OUTOFBOUNDS};
-enum direction {NONE=-1, UP, RIGHT, DOWN, LEFT};
+#include "constants.hpp"
 
 using std::vector;
 

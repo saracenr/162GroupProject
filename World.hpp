@@ -1,11 +1,11 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "Doodlebug.hpp"
+#include "Ant.hpp"
 #include <vector>
 
 using std::vector;
-#include "Doodlebug.hpp"
-#include "Ant.hpp"
 
 class World
 {
