@@ -3,6 +3,11 @@
 
 Doodlebug::Doodlebug(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, DOODLEBUG) {}
 
+bool Doodlebug::move(vector<spaceType>)
+{
+	return false;
+}
+
 bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType left) {
 
     bool nearbyAnt = false;
@@ -111,6 +116,11 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
             return false;
         }
     }
+}
+
+direction Doodlebug::breed()
+{
+	return NONE;
 }
 
 direction Doodlebug::breed(vector<spaceType> spaces) //WIP

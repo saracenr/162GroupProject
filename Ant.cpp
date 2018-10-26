@@ -4,6 +4,11 @@
 
 Ant::Ant(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, ANT) {}
 
+bool Ant::move(vector<spaceType>)
+{
+	return false;
+}
+
 bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
     std::random_device rd;  // Seeds the random number.
     std::mt19937 gen(rd());
@@ -58,6 +63,11 @@ bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
             return false;
         }
     }
+}
+
+direction Ant::breed()
+{
+	return NONE;
 }
 
 /*****************************************************************
