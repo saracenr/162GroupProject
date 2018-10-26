@@ -350,7 +350,7 @@ void World::setAdjacent(int rowIn, int colIn)
 		}
 	}
 	//right
-	if (colIn + 1 > nCol) {
+	if (colIn + 1 > nCol - 1) {
 		adjacents[1] = OUTOFBOUNDS;
 	}
 	else if (critterSim[rowIn][colIn + 1] == nullptr) {
@@ -366,7 +366,7 @@ void World::setAdjacent(int rowIn, int colIn)
 		}
 	}
 	//below
-	if (rowIn + 1 > nRow) {
+	if (rowIn + 1 > nRow - 1) {
 		adjacents[2] = OUTOFBOUNDS;
 	}
 	else if (critterSim[rowIn + 1][colIn] == nullptr) {
