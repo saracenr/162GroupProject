@@ -97,4 +97,6 @@ direction Ant::breed(vector<spaceType> spaces)
 	return retDir;
 }
 
-bool Ant::starve() {}
+bool Ant::starve() {
+    return false;
+}

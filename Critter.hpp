@@ -19,6 +19,7 @@ public:
     void setY(int);  // Set y Coord.
     void resetMoved();  //  Sets hasMovedThisTurn to false.
     void hasMoved();  //  Sets hasMovedThisTurn to true.
+    bool getMoved();
     int getBreed();  //  Returns stepsSinceBreed.
     void incBreed();  //  Increments stepsSinceBreed.
     void resetBreed();  //  Sets stepsSinceBreed to 0.

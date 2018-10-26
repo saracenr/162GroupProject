@@ -34,6 +34,10 @@ void Critter::hasMoved() {
     hasMovedThisTurn = true;
 }
 
+bool Critter::getMoved(){
+    return hasMovedThisTurn;
+}
+
 int Critter::getBreed() {
     return stepsSinceBreed;
 }

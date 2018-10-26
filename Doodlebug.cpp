@@ -31,28 +31,28 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 
     //  If an ant is nearby it will move and eat the first one found in the loop above (up >> right >> down >> left)
     if (nearbyAnt) {
-        if (x == UP) {
+        if (x == up) {
             setX(getX() - 1);
             hasMoved();
             incBreed();
             resetEat();
             return true;
         }
-        else if (x == RIGHT) {
+        else if (x == right) {
             setY(getY() + 1);
             hasMoved();
             incBreed();
             resetEat();
             return true;
         }
-        else if (x == DOWN) {
+        else if (x == down) {
             setX(getX() + 1);
             hasMoved();
             incBreed();
             resetEat();
             return true;
         }
-        else if (x == LEFT) {
+        else if (x == left) {
             setY(getY() - 1);
             hasMoved();
             incBreed();

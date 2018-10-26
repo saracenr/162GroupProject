@@ -85,8 +85,10 @@ World::~World()
 
 
 // Function to print board with lines around the outside of it to show limits
-void World::printGrid()
-{
+void World::printGrid(){
+
+	int numDoodles = 0, numAnts = 0;
+
 	// print row of dashes before world rows
 	for (int i=0; i<=(nCol+1); i++)
 	{
@@ -108,11 +110,13 @@ void World::printGrid()
 				(critterSim[i][j])->getCritterType()==ANT)
 			{
 				std::cout<<ANT_CHAR;
+				numAnts++;
 			}
 			else if (critterSim[i][j]!=nullptr && 
 				(critterSim[i][j])->getCritterType()==DOODLEBUG)
 			{
 				std::cout<<DOODLE_CHAR;
+				numDoodles++;
 			}
 		}
 		std::cout<<"|"<<std::endl;
@@ -124,6 +128,7 @@ void World::printGrid()
 		std::cout<<"-";
 	}
 	std::cout<<std::endl;
+	std::cout << "Doodlebugs: " << numDoodles << "   " << "Ants: " << numAnts << std::endl;
 
 	return;
 
@@ -159,9 +164,7 @@ void World::breedCritters(critterType c)  //WIP, incomplete
 			}
 		}
 	}
-} 
-void World::starveCritters(){} //WIP
-void World::runSim(int nSteps){} //WIP
+}
 
 void World::runIter(){
 	resetCritters();
@@ -171,102 +174,105 @@ void World::runIter(){
 	moveCritters(ANT);
 	breedCritters(ANT);
 
-} //WIP
+}
 
 void World::moveCritters(critterType c){
 	for(int i = 0; i < nRow; i++){
 		for(int j = 0; j < nCol; j++){
-			// make sure critterType matches
-			if(critterSim[i][j]->getCritterType() == c){
-				// make spaces to give status of possible moves
-				spaceType up, down, right, left;
+			if(critterSim[i][j] != NULL){
+				if(critterSim[i][j]->getCritterType() == c && critterSim[i][j]->getMoved() == false){
+					// make spacetypes for possible moves
+					spaceType up = OUTOFBOUNDS, down = OUTOFBOUNDS, right = OUTOFBOUNDS, left = OUTOFBOUNDS;
 
-				// check spaces to set up
-				if(critterSim[i - 1][j] == NULL && inBounds(i - 1, j) == true){
-					up = EMPTY;
-				}
-				else if(inBounds(i - 1, j) == false){
-					up = OUTOFBOUNDS;
-				}
-				else if(critterSim[i - 1][j]->getCritterType() == DOODLEBUG){
-					up = DOODLEBUG_SPACE;
-				}
-				else if(critterSim[i - 1][j]->getCritterType() == ANT){
-					up = ANT_SPACE;
-				}
-				// check spaces to set down
-				if(critterSim[i + 1][j] == NULL && inBounds(i + 1, j) == true){
-					down = EMPTY;
-				}
-				else if(inBounds(i + 1, j) == false){
-					down = OUTOFBOUNDS;
-				}
-				else if(critterSim[i + 1][j]->getCritterType() == DOODLEBUG){
-					down = DOODLEBUG_SPACE;
-				}
-				else if(critterSim[i + 1][j]->getCritterType() == ANT){
-					down = ANT_SPACE;
-				}
-				// check spaces to set right
-				if(critterSim[i][j + 1] == NULL && inBounds(i, j + 1) == true){
-					right = EMPTY;
-				}
-				else if(inBounds(i, j + 1) == false){
-				 	right = OUTOFBOUNDS;
-				}
-				else if(critterSim[i][j + 1]->getCritterType() == DOODLEBUG){
-					right = DOODLEBUG_SPACE;
-				}
-				else if(critterSim[i][j + 1]->getCritterType() == ANT){
-					right = ANT_SPACE;
-				}
-				// check spaces to set left
-				if(critterSim[i][j - 1] == NULL && inBounds(i, j - 1) == true){
-					left = EMPTY;
-				}
-				else if(inBounds(i, j - 1) == false){
-					left = OUTOFBOUNDS;
-				}
-				else if(critterSim[i][j - 1]->getCritterType() == DOODLEBUG){
-					left = DOODLEBUG_SPACE;
-				}
-				else if(critterSim[i][j - 1]->getCritterType() == ANT){
-					left = ANT_SPACE;
-				}
-
-				// input spaces into function to get bool, and move critter on board if true
-				if(critterSim[i][j]->move(up, right, down, left) == true){
-					// delete ant if eat
-					if(critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()]->getCritterType() == ANT){
-						delete critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()];
-						critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] = NULL;
+					// set up
+					if(inBounds(i - 1, j) == false){
+						up = OUTOFBOUNDS;
 					}
-					// move critter
-					critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] = critterSim[i][j];
-					critterSim[i][j] = NULL;
+					else if(critterSim[i - 1][j] == NULL && inBounds(i - 1, j) == true){
+						up = EMPTY;
+					}
+					else if(critterSim[i - 1][j]->getCritterType() == DOODLEBUG && inBounds(i - 1, j) == true){
+						up = DOODLEBUG_SPACE;
+					}
+					else if(critterSim[i - 1][j]->getCritterType() == ANT && inBounds(i - 1, j) == true){
+						up = ANT_SPACE;
+					}
+
+					// set down
+					if(inBounds(i + 1, j) == false){
+						down = OUTOFBOUNDS;
+					}
+					else if(critterSim[i + 1][j] == NULL && inBounds(i + 1, j) == true){
+						down = EMPTY;
+					}
+					else if(critterSim[i + 1][j]->getCritterType() == DOODLEBUG && inBounds(i + 1, j) == true){
+						down = DOODLEBUG_SPACE;
+					}
+					else if(critterSim[i + 1][j]->getCritterType() == ANT && inBounds(i + 1, j) == true){
+						down = ANT_SPACE;
+					}
+
+					// set right
+					if(inBounds(i, j + 1) == false){
+						right = OUTOFBOUNDS;
+					}
+					else if(critterSim[i][j + 1] == NULL && inBounds(i, j + 1) == true){
+						right = EMPTY;
+					}
+					else if(critterSim[i][j + 1]->getCritterType() == DOODLEBUG && inBounds(i, j + 1) == true){
+						right = DOODLEBUG_SPACE;
+					}
+					else if(critterSim[i][j + 1]->getCritterType() == ANT && inBounds(i, j + 1) == true){
+						right = ANT_SPACE;
+					}
+
+					// set left
+					if(inBounds(i, j - 1) == false){
+						left = OUTOFBOUNDS;
+					}
+					else if(critterSim[i][j - 1] == NULL && inBounds(i, j - 1) == true){
+						left = EMPTY;
+					}
+					else if(critterSim[i][j - 1]->getCritterType() == DOODLEBUG && inBounds(i, j - 1) == true){
+						left = DOODLEBUG_SPACE;
+					}
+					else if(critterSim[i][j - 1]->getCritterType() == ANT && inBounds(i, j - 1) == true){
+						left = ANT_SPACE;
+					}
+
+					// check if doodle eats ant, and move spaces
+					if(critterSim[i][j]->move(up, right, down, left) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
+						if(critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] != NULL){
+							if(critterSim[i][j]->getCritterType() == DOODLEBUG && critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()]->getCritterType() == ANT){
+								delete critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()];
+								critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] = NULL;
+							}
+						}
+						critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] = critterSim[i][j];
+						critterSim[i][j] = NULL;
+					}
 				}
 			}
 		}
 	}
-} //WIP
-
+}
 
 void World::starveCritters(){
 	for(int i = 0; i < nRow; i++){
 		for(int j = 0; j < nCol; j++){
-			if(critterSim[i][j]->getCritterType() == DOODLEBUG && critterSim[i][j]->starve() == true){
+			if(critterSim[i][j]->starve() == true){
 				delete critterSim[i][j];
 				critterSim[i][j] = NULL;
 			}
 		}
 	}
-} //WIP
+}
 
 void World::runSim(int nSteps){
 	for(int i = 0; i < nSteps; i++){
 		runIter();
 	}
-} //WIP
+}
 
 bool World::inBounds(int row, int col){
 	if(row >= 0 && row < nRow && col >= 0 && col < nCol){

@@ -18,15 +18,15 @@ class World
 		vector<spaceType> adjacents; //to hold all adjacent spaces (0-up, 1-r, 2-d, 3-l)
 		direction breedDir;
 	public: 
-		World(int nr=20, int nc=20, int na=100, int nd=5); //WIP
+		World(int nr=20, int nc=20, int na=100, int nd=5);
 		~World(); 
-		void runIter(); //WIP
+		void runIter();
 		void resetCritters(); 
-		void moveCritters(critterType c); //WIP
+		void moveCritters(critterType c);
 		void breedCritters(critterType c); //WIP
-		void starveCritters(); //WIP
+		void starveCritters();
 		void printGrid(); 
-		void runSim(int nSteps); //WIP
+		void runSim(int nSteps);
 		void setAdjacent(int, int);
 		bool inBounds(int r, int c);
 

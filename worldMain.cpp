@@ -9,8 +9,12 @@ int main()
 	//srand(seed);
 
 	World w;
-	w.resetCritters();
 	w.printGrid();
+	w.moveCritters(DOODLEBUG);
+	w.printGrid();
+	w.moveCritters(ANT);
+	w.printGrid();
+	w.resetCritters();
 	
 	return 0;
 }
