@@ -77,7 +77,7 @@ Returns direction of breed.
 direction Ant::breed(vector<spaceType> spaces) 
 {
 	direction retDir = NONE;
-	if (getBreed() == 3) {
+	if (getBreed() >= 3) {
 		vector<int> empties;
 		//extract the empty spaces
 		for (int i = 0; i < 4; i ++) {
@@ -90,9 +90,9 @@ direction Ant::breed(vector<spaceType> spaces)
 			//get random index
 			int randIndex = rand() % empties.size(); //0 - UP; 1 - RIGHT; 2 - DOWN; 3 - LEFT
 			retDir = static_cast<direction>(empties[randIndex]);
+			resetBreed();
 		}
 
-		resetBreed();
 	}
 	return retDir;
 }

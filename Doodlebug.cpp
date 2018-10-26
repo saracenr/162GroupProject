@@ -130,7 +130,7 @@ direction doodlebug was bred. Returns NONE if no spaces available.
 direction Doodlebug::breed(vector<spaceType> spaces) //WIP
 {
 	direction retDir = NONE;
-	if (getBreed() == 8) {
+	if (getBreed() >= 8) {
 		vector<int> empties;
 		//get empty spaces
 		for (int i = 0; i < 4; i++) {
@@ -143,8 +143,8 @@ direction Doodlebug::breed(vector<spaceType> spaces) //WIP
 			//get random index
 			int randIndex = rand() % empties.size();
 			retDir = static_cast<direction>(empties[randIndex]);
+			resetBreed();
 		}
-		resetBreed();
 	}
 	return retDir;
 }

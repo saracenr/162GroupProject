@@ -1,3 +1,7 @@
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
+
+
 // constants to indicate ASCII range of integers
 const int ASCII_INT_MIN = 48;
 const int ASCII_INT_MAX = 57;
@@ -9,3 +13,5 @@ const int ASCII_INT_MAX = 57;
 char ANT_CHAR='O';
 char DOODLE_CHAR='X';
 char EMPTY_CHAR=' ';
+
+#endif // !CONSTANTS_HPP
