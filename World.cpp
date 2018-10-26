@@ -22,20 +22,39 @@ World::World(int nr, int nc, int na, int nd)
 	}
 
 
-	/*int randRow, randCol;
+	int randRow, randCol;
 	for (int i=0; i<numAnts; i++)
 	{
 		randRow=(rand()%nRow);
 		randCol=(rand()%nCol);
 
-		while (critterSim[randRow][randCol]!=nullPtr)
-	}*/
+		// generate new random rows until you randomly find a nullptr
+		while (critterSim[randRow][randCol]!=nullptr)
+		{
+			randRow=(rand()%nRow);
+			randCol=(rand()%nCol);
+		}
 
-	// tests 
-	critterSim[1][1] = new Ant(1,1);
-	critterSim[1][2] = new Ant(1,2);
+		critterSim[randRow][randCol]=new Ant(randRow, randCol);
+	}
 
-} //WIP
+
+	for (int i=0; i<numDoodles; i++)
+	{
+		randRow=(rand()%nRow);
+		randCol=(rand()%nCol);
+
+		// generate new random rows until you randomly find a nullptr
+		while (critterSim[randRow][randCol]!=nullptr)
+		{
+			randRow=(rand()%nRow);
+			randCol=(rand()%nCol);
+		}
+
+		critterSim[randRow][randCol]=new Doodlebug(randRow, randCol);
+	}
+
+} 
 
 World::~World()
 {

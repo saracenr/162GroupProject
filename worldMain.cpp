@@ -5,8 +5,8 @@
 
 int main()
 {
-	unsigned seed = time(0);
-	srand(seed);
+	//unsigned seed = time(0);
+	//srand(seed);
 
 	World w;
 	w.resetCritters();
