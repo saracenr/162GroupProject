@@ -10,7 +10,6 @@ World::World(int nr, int nc, int na, int nd)
 	nCol=nc;
 	numAnts=na;
 	numDoodles=nd;
-	breedDir = NONE;
 
 	//initialize all out of bounds
 	for (int i = 0; i < 4; i++) {
@@ -156,6 +155,7 @@ new critter type in appropriate adjacent cell.
 *********************************************************************/
 void World::breedCritters(critterType c)  
 {
+	direction breedDir = NONE;
 	for (int i = 0; i < nRow; i++) {
 		for (int j = 0; j < nCol; j++) {
 			//Filter for Doodlebugs
