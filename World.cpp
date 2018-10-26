@@ -154,13 +154,49 @@ void World::resetCritters()
 Calls each critter's breed function to get direction of breed. Sets
 new critter type in appropriate adjacent cell.
 *********************************************************************/
-void World::breedCritters(critterType c)  //WIP, incomplete
+void World::breedCritters(critterType c)  
 {
 	for (int i = 0; i < nRow; i++) {
 		for (int j = 0; j < nCol; j++) {
-			if (critterSim[i][j] != nullptr) {
-				setAdjacent(i, j);
-				breedDir = critterSim[i][j]->breed(adjacents); //RJ  will pick up here later
+			//Filter for Doodlebugs
+			if (c == DOODLEBUG) {
+				if (critterSim[i][j] != nullptr && critterSim[i][j]->getCritterType() == DOODLEBUG) { //team Arrow!! ;)
+					setAdjacent(i, j);
+					breedDir = critterSim[i][j]->breed(adjacents); //RJ  will pick up here later
+					//place new doodle according to returned breed direction
+					if (breedDir == UP) {
+						critterSim[i - 1][j] = new Doodlebug(i-1, j);
+					}
+					if (breedDir == RIGHT) {
+						critterSim[i][j + 1] = new Doodlebug(i, j + 1);
+					}
+					if (breedDir == DOWN) {
+						critterSim[i + 1][j] = new Doodlebug(i + 1, j);
+					}
+					if (breedDir == LEFT) {
+						critterSim[i][j - 1] = new Doodlebug(i, j - 1);
+					}
+				}
+			}
+			//Filter for Ants
+			if (c == ANT) {
+				if (critterSim[i][j] != nullptr && critterSim[i][j]->getCritterType() == ANT) {
+					setAdjacent(i, j);
+					breedDir = critterSim[i][j]->breed(adjacents);
+					//Place new Ants according to returned breed direction
+					if (breedDir == UP) {
+						critterSim[i - 1][j] = new Ant(i - 1, j);
+					}
+					if (breedDir == RIGHT) {
+						critterSim[i][j + 1] = new Ant(i, j + 1);
+					}
+					if (breedDir == DOWN) {
+						critterSim[i + 1][j] = new  Ant(i + 1, j);
+					}
+					if (breedDir == LEFT) {
+						critterSim[i][j - 1] = new Ant(i, j - 1);
+					}
+				}
 			}
 		}
 	}

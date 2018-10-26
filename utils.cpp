@@ -3,6 +3,7 @@
 #include "utils.hpp"
 #include "constants.hpp"
 #include <iostream>
+#include <string>
 
 
 // input validation requires two ints, to indicate the allowed range for input
@@ -31,11 +32,11 @@ int getInt(int min, int max)
 		if (retString.length()>0) 
 		{
 			// process the string, char by char, to see if it's a numeric
-			for (int i=0; i<retString.length(); i++)
+			for (std::string::size_type i=0; i<retString.length(); i++)
 			{
 				tempChar = static_cast<char>(retString[i]);
 				// if the first character is a negatve, note it, and continue
-				if (i==0 & tempChar=='-')
+				if (i==0 && tempChar=='-')
 				{
 					isNeg=true;
 				}
