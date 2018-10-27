@@ -1,5 +1,6 @@
 
 #include "Doodlebug.hpp"
+#include <iostream>
 
 Doodlebug::Doodlebug(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, DOODLEBUG) {}
 
@@ -74,9 +75,11 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 			setX(getX() - 1);
 			hasMoved();
 			incBreed();
+			incEat();
 			return true;
 		}
 		else {
+			incEat();
 			return false;
 		}
 	}
@@ -86,9 +89,11 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 			setY(getY() + 1);
 			hasMoved();
 			incBreed();
+			incEat();
 			return true;
 		}
 		else {
+			incEat();
 			return false;
 		}
 	}
@@ -98,9 +103,11 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 			setX(getX() + 1);
 			hasMoved();
 			incBreed();
+			incEat();
 			return true;
 		}
 		else {
+			incEat();
 			return false;
 		}
 	}
@@ -110,9 +117,11 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 			setY(getY() - 1);
 			hasMoved();
 			incBreed();
+			incEat();
 			return true;
 		}
 		else {
+			incEat();
 			return false;
 		}
 	}

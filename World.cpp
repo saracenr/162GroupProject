@@ -86,7 +86,8 @@ World::~World()
 // Function to print board with lines around the outside of it to show limits
 void World::printGrid(){
 
-	int numDoodles = 0, numAnts = 0;
+	numDoodles = 0;
+	numAnts = 0;
 
 	// print row of dashes before world rows
 	for (int i=0; i<=(nCol+1); i++)
@@ -162,10 +163,8 @@ void World::breedCritters(critterType c)
 			if (c == DOODLEBUG) {
 				if (critterSim[i][j] != nullptr) {
 					if (critterSim[i][j]->getCritterType() == DOODLEBUG) { //team Arrow!! ;)
-						std::cout << "found doodle: " << i << ", " << j << std::endl;
 						setAdjacent(i, j);
 						breedDir = critterSim[i][j]->breed(adjacents); //RJ  will pick up here later
-						std::cout << "breedDir: " << breedDir << std::endl;
 						//place new doodle according to returned breed direction
 						if (breedDir == UP) {
 							critterSim[i - 1][j] = new Doodlebug(i - 1, j);

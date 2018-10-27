@@ -1,6 +1,7 @@
 
 #include <random>
 #include "Ant.hpp"
+#include <iostream>
 
 Ant::Ant(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, ANT) {}
 

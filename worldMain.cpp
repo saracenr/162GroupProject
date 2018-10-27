@@ -3,6 +3,11 @@
 #include <cstdlib>
 #include <random>
 #include <ctime>
+#include <iostream>
+
+using std::cout;
+using std::cin;
+using std::endl;
 
 int main()
 {
@@ -11,12 +16,19 @@ int main()
 
 	World w;
 	w.printGrid();
-	for (int i = 0; i < 10; i++) {
-		w.moveCritters(DOODLEBUG);
-		w.printGrid();
+	for (int i = 0; i < 5; i++) {
 		w.resetCritters();
+		cout << "Step: " << i << endl;
+		w.moveCritters(DOODLEBUG);
+		w.breedCritters(DOODLEBUG);
+		w.starveCritters();
+		w.printGrid();
+		w.moveCritters(ANT);
+		w.breedCritters(ANT);
+		cout << "Step: " << i << endl;
+		w.printGrid();
 	}
-	w.breedCritters(DOODLEBUG);
+	//w.breedCritters(DOODLEBUG);
 	w.printGrid();
 	//w.moveCritters(ANT);
 	//w.printGrid();
