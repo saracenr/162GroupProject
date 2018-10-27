@@ -146,5 +146,12 @@ direction Doodlebug::breed(vector<spaceType> spaces) //WIP
 
 bool Doodlebug::starve()  //WIP
 {
-	return false;
+	if (getEat()>=3)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
 }
