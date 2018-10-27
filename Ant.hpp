@@ -10,7 +10,6 @@ public:
     bool move(vector<spaceType>); // Checks if a random adjacent space is empty and moves there if so.
     direction breed(vector<spaceType>);
     bool move(spaceType, spaceType, spaceType, spaceType); // Checks if a random adjacent space is empty and moves there if so.
-    direction breed();
     bool starve();
     ~Ant(){};
 };

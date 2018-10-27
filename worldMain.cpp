@@ -11,8 +11,10 @@ int main()
 
 	World w;
 	w.printGrid();
-	for (int i = 8; i < 10; i++) {
+	for (int i = 0; i < 10; i++) {
 		w.moveCritters(DOODLEBUG);
+		w.printGrid();
+		w.resetCritters();
 	}
 	w.breedCritters(DOODLEBUG);
 	w.printGrid();
