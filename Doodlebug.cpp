@@ -7,7 +7,7 @@ Doodlebug::Doodlebug(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, DOODLE
 bool Doodlebug::move(vector<spaceType> adjacents) {
 
 	bool nearbyAnt = false;
-	spaceType x;
+	direction x;
 	if(adjacents[0] == ANT_SPACE) {  //  Checks if an ant is adjacent to the doodlebug.
 		nearbyAnt = true;
 		x = UP;
