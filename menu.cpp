@@ -31,7 +31,7 @@ void menu()
 
 	World w(numRow, numCol, numAnt, numDoodle);
 	w.printGrid();
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < numSteps; i++) {
 		w.resetCritters();
 		std::cout << "Step: " << i << std::endl;
 		w.moveCritters(DOODLEBUG);
