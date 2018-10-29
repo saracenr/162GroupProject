@@ -1,6 +1,6 @@
 
-doodle: worldMain.o Ant.o World.o utils.o Critter.o Doodlebug.o
-	g++ worldMain.o Ant.o World.o utils.o Critter.o Doodlebug.o -o doodle
+doodle: worldMain.o Ant.o World.o utils.o Critter.o Doodlebug.o menu.o
+	g++ worldMain.o Ant.o World.o utils.o Critter.o Doodlebug.o menu.o -o doodle
 
 Critter.o: Critter.cpp
 	g++ -std=c++11 -c Critter.cpp
@@ -19,6 +19,9 @@ utils.o: utils.cpp utils.hpp
 
 Doodlebug.o: Doodlebug.cpp Doodlebug.hpp
 	g++ -std=c++11 -c Doodlebug.cpp
+	
+menu.o: menu.cpp menu.hpp
+	g++ -std=c++11 -c menu.cpp
 
 clean:
 	rm *.o doodle
