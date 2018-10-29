@@ -12,42 +12,62 @@ void menu()
 	int numAnt = 0;
 	int numDoodle = 0;
 	int numSteps = 0;
+	int menuChoice = 0;
+	bool menuRepeater = true;
+
 	std::cout << "To the grader. We did the extra credit. No beating around the bush here." << std::endl;
 
-	std::cout << "Please select a number of grid rows between 2 and 200 for the critters." << std::endl;
-	numRow = getInt(2, 200);
+	std::cout << "Welcome to our game. Would you like to play?" << "\n";
+	std::cout << "1. Play the game" << "\n";
+	std::cout << "2. Quit" << std::endl;
+	menuChoice = getInt(1, 2);
 
-	std::cout << "Please select a number of grid columns between 2 and 200 for the critters." << std::endl;
-	numCol = getInt(2, 200);
+	while (menuRepeater)
+	{
+		if (menuChoice == 1)
+		{
+			std::cout << "Please select a number of grid rows between 2 and 200 for the critters." << std::endl;
+			numRow = getInt(2, 200);
 
-	std::cout << "Please select a number between 50 and 300 of ants." << std::endl;
-	numAnt = getInt(50, 300);
+			std::cout << "Please select a number of grid columns between 2 and 200 for the critters." << std::endl;
+			numCol = getInt(2, 200);
 
-	std::cout << "Please select a number between 2 and 20 of doodlebugs." << std::endl;
-	numDoodle = getInt(2, 20);
+			std::cout << "Please select a number between 2 and " << numRow * numCol << " of ants." << std::endl;
+			numAnt = getInt(2, numRow * numCol);
 
-	std::cout << "And finally, please select a number of steps between 2 and 200 for the program to run through." << std::endl;
-	numSteps = getInt(2, 200);
+			std::cout << "Please select a number between 2 and " << numRow * numCol - numAnt << " of doodlebugs." << std::endl;
+			numDoodle = getInt(2, numRow * numCol - numAnt);
 
-	World w(numRow, numCol, numAnt, numDoodle);
-	w.printGrid();
-	for (int i = 0; i < numSteps; i++) {
-		w.resetCritters();
-		std::cout << "Step: " << i << std::endl;
-		w.moveCritters(DOODLEBUG);
-		w.breedCritters(DOODLEBUG);
-		w.starveCritters();
-		w.printGrid();
-		w.moveCritters(ANT);
-		w.breedCritters(ANT);
-		std::cout << "Step: " << i << std::endl;
-		w.printGrid();
-	}
-	//w.breedCritters(DOODLEBUG);
-	w.printGrid();
-	//w.moveCritters(ANT);
-	//w.printGrid();
-	//w.resetCritters();
+			std::cout << "And finally, please select a number of steps between 2 and 200 for the program to run through." << std::endl;
+			numSteps = getInt(2, 200);
 
-	
+			World w(numRow, numCol, numAnt, numDoodle);
+			w.printGrid();
+			for (int i = 0; i < 5; i++) {
+				w.resetCritters();
+				std::cout << "Step: " << i << std::endl;
+				w.moveCritters(DOODLEBUG);
+				w.breedCritters(DOODLEBUG);
+				w.starveCritters();
+				w.printGrid();
+				w.moveCritters(ANT);
+				w.breedCritters(ANT);
+				std::cout << "Step: " << i << std::endl;
+				w.printGrid();
+			}
+			//w.breedCritters(DOODLEBUG);
+			w.printGrid();
+			//w.moveCritters(ANT);
+			//w.printGrid();
+			//w.resetCritters();
+
+			std::cout << "1. Play the game again" << "\n";
+			std::cout << "2. Quit" << std::endl;
+			menuChoice = getInt(1, 2);
+		}
+		else if (menuChoice == 2)
+		{
+			menuRepeater = false;
+		}
+	}	
 }
