@@ -32,11 +32,11 @@ void menu()
 			std::cout << "Please select a number of grid columns between 2 and 80 for the critters." << std::endl;
 			numCol = getInt(2, 80);
 
-			std::cout << "Please select a number between 2 and " << numRow * numCol << " of ants." << std::endl;
-			numAnt = getInt(2, numRow * numCol);
+			std::cout << "Please select a number between 0 and " << numRow * numCol << " of ants." << std::endl;
+			numAnt = getInt(0, numRow * numCol);
 
-			std::cout << "Please select a number between 2 and " << numRow * numCol - numAnt << " of doodlebugs." << std::endl;
-			numDoodle = getInt(2, numRow * numCol - numAnt);
+			std::cout << "Please select a number between 0 and " << numRow * numCol - numAnt << " of doodlebugs." << std::endl;
+			numDoodle = getInt(0, numRow * numCol - numAnt);
 
 			std::cout << "And finally, please select a number of steps between 2 and 200 for the program to run through." << std::endl;
 			numSteps = getInt(2, 200);
