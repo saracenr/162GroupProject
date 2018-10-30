@@ -215,7 +215,6 @@ void World::runIter(){
 	moveCritters(ANT);
 	breedCritters(ANT);
 	printGrid(); // print after every step
-
 }
 
 void World::moveCritters(critterType c){
@@ -311,7 +310,9 @@ void World::starveCritters(){
 }
 
 void World::runSim(int nSteps){
+	printGrid();
 	for(int i = 0; i < nSteps; i++){
+		std::cout << "Step: " << i+1 << std::endl;
 		runIter();
 	}
 }

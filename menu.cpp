@@ -42,24 +42,7 @@ void menu()
 			numSteps = getInt(2, 200);
 
 			World w(numRow, numCol, numAnt, numDoodle);
-			w.printGrid();
-			for (int i = 0; i < 5; i++) {
-				w.resetCritters();
-				std::cout << "Step: " << i << std::endl;
-				w.moveCritters(DOODLEBUG);
-				w.breedCritters(DOODLEBUG);
-				w.starveCritters();
-				w.printGrid();
-				w.moveCritters(ANT);
-				w.breedCritters(ANT);
-				std::cout << "Step: " << i << std::endl;
-				w.printGrid();
-			}
-			//w.breedCritters(DOODLEBUG);
-			w.printGrid();
-			//w.moveCritters(ANT);
-			//w.printGrid();
-			//w.resetCritters();
+			w.runSim(numSteps);
 
 			std::cout << "1. Play the game again" << "\n";
 			std::cout << "2. Quit" << std::endl;
