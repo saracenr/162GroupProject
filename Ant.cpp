@@ -69,7 +69,7 @@ bool Ant::move(vector<spaceType> adjacents) {
 	}
 }
 
-bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
+/*bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
 	std::random_device rd;  // Seeds the random number.
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> ran(0, 3); //  Random number from 0 to 3. (up[0], right[1], down[2], left[3])
@@ -131,7 +131,7 @@ bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
 			return false;
 		}
 	}
-}
+}*/
 
 /*****************************************************************
 Create new ant in an open adjacent space, if space exists.

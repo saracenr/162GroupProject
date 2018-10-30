@@ -131,7 +131,7 @@ bool Doodlebug::move(vector<spaceType> adjacents) {
 	return false;
 }
 
-bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType left) {
+/*bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType left) {
 
 	bool nearbyAnt = false;
 	spaceType x;
@@ -247,7 +247,7 @@ bool Doodlebug::move(spaceType up, spaceType right, spaceType down, spaceType le
 			return false;
 		}
 	}
-}
+}*/
 
 /****************************************************************************
 Breeds the Doodlebug. Takes adjacent spaces as parameter. Returns the 

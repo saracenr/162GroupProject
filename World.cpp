@@ -223,7 +223,7 @@ void World::moveCritters(critterType c){
 			if(critterSim[i][j] != nullptr){
 				if(critterSim[i][j]->getCritterType() == c && critterSim[i][j]->getMoved() == false){
 					// make spacetypes for possible moves
-					spaceType up = OUTOFBOUNDS, down = OUTOFBOUNDS, right = OUTOFBOUNDS, left = OUTOFBOUNDS;
+					/*spaceType up = OUTOFBOUNDS, down = OUTOFBOUNDS, right = OUTOFBOUNDS, left = OUTOFBOUNDS;
 
 					// set up
 					if(inBounds(i - 1, j) == false){
@@ -279,10 +279,12 @@ void World::moveCritters(critterType c){
 					}
 					else if(critterSim[i][j - 1]->getCritterType() == ANT && inBounds(i, j - 1) == true){
 						left = ANT_SPACE;
-					}
+					}*/
 
+					setAdjacent(i, j);
 					// check if doodle eats ant, and move spaces
-					if(critterSim[i][j]->move(up, right, down, left) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
+					//if(critterSim[i][j]->move(up, right, down, left) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
+					if(critterSim[i][j]->move(adjacents) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
 						if(critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] != nullptr){
 							if(critterSim[i][j]->getCritterType() == DOODLEBUG && critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()]->getCritterType() == ANT){
 								delete critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()];

@@ -25,7 +25,8 @@ public:
     void resetEat();  //  Sets stepsSinceEat to 0.
     critterType getCritterType();
     virtual direction breed(vector<spaceType>)=0;
-    virtual bool move(spaceType, spaceType, spaceType, spaceType) = 0;
+    //virtual bool move(spaceType, spaceType, spaceType, spaceType) = 0;
+    virtual bool move(vector<spaceType>) = 0;
     virtual bool starve()= 0;
     virtual ~Critter(){};
 

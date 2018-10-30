@@ -10,7 +10,7 @@ public:
     Doodlebug(int, int);
     bool move(vector<spaceType>);
     direction breed(vector<spaceType>);
-    bool move(spaceType, spaceType, spaceType, spaceType);
+    //bool move(spaceType, spaceType, spaceType, spaceType);
     bool starve();
     ~Doodlebug(){};
 };
