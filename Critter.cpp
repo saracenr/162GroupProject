@@ -47,7 +47,7 @@ void Critter::incBreed() {
 }
 
 void Critter::resetBreed() {
-    stepsSinceEat = 0;
+    stepsSinceBreed = 0;
 }
 
 int Critter::getEat() {

@@ -26,11 +26,11 @@ void menu()
 	{
 		if (menuChoice == 1)
 		{
-			std::cout << "Please select a number of grid rows between 2 and 200 for the critters." << std::endl;
-			numRow = getInt(2, 200);
+			std::cout << "Please select a number of grid rows between 2 and 100 for the critters." << std::endl;
+			numRow = getInt(2, 100);
 
-			std::cout << "Please select a number of grid columns between 2 and 200 for the critters." << std::endl;
-			numCol = getInt(2, 200);
+			std::cout << "Please select a number of grid columns between 2 and 80 for the critters." << std::endl;
+			numCol = getInt(2, 80);
 
 			std::cout << "Please select a number between 2 and " << numRow * numCol << " of ants." << std::endl;
 			numAnt = getInt(2, numRow * numCol);
