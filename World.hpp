@@ -15,7 +15,7 @@ class World
 		int numDoodles;
 		int nRow;
 		int nCol;
-		vector<spaceType> adjacents; //to hold all adjacent spaces (0-up, 1-r, 2-d, 3-l)
+		vector<spaceType> adjacents; //holds adjacent spaces (0-u, 1-r, 2-d, 3-l)
 	public: 
 		World(int nr=20, int nc=20, int na=100, int nd=5);
 		~World(); 

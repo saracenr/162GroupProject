@@ -5,6 +5,12 @@
 #include"utils.hpp"
 #include<iostream>
 
+/*****************************************************************
+Menu function for predator/prey simulation. Prompts the user to enter
+simulation parameters, and creates a World object to run a simulation. It
+continues to prompt the user to enter simulation parameters until the 
+user chooses to quit.
+*****************************************************************/
 void menu()
 {
 	int numRow = 0;

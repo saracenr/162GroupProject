@@ -1,6 +1,6 @@
 /*****************************************************************************************
  * Program Name: doodle
- * Authors: Robert Saraceno, Christina Brasco, Russel James,
+ * Authors: Robert Saraceno, Christina Brasco, Russell James,
  * Christopher Gundlach, Amy Stockinger
  * Date: 10/24/2018
  * Class: Doodlebug
@@ -26,7 +26,6 @@ public:
     Doodlebug(int, int);
     bool move(vector<spaceType>);
     direction breed(vector<spaceType>);
-    //bool move(spaceType, spaceType, spaceType, spaceType);
     bool starve();
     ~Doodlebug(){};
 };

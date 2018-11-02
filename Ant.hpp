@@ -1,6 +1,6 @@
 /*****************************************************************************************
  * Program Name: doodle
- * Authors: Robert Saraceno, Christina Brasco, Russel James,
+ * Authors: Robert Saraceno, Christina Brasco, Russell James,
  * Christopher Gundlach, Amy Stockinger
  * Date: 10/24/2018
  * Class: Ant

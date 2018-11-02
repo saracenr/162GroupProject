@@ -1,9 +1,13 @@
 #include "World.hpp"
-//#include "Ant.hpp"
-//#include "Doodlebug.hpp"
-//#include "constants.hpp"
 #include <iostream>
 
+
+/*****************************************************************
+World constructor. Takes number of rows/columns, and critters, and
+dynamically allocates a triple pointer (2d array of Critter*). Sets
+all pointers in array to nullptr, except randomly chosen ones which
+are set to appropriate critters. 
+*****************************************************************/
 World::World(int nr, int nc, int na, int nd)
 {
 	nRow=nr;
@@ -61,6 +65,10 @@ World::World(int nr, int nc, int na, int nd)
 
 } 
 
+/*****************************************************************
+World destructor. Deletes each element, rows and finally the entire 
+Critter*** object, to prevent memory leaks.
+*****************************************************************/
 World::~World()
 {
 	for (int i=0; i<nRow; i++)
@@ -83,7 +91,11 @@ World::~World()
 }
 
 
-// Function to print board with lines around the outside of it to show limits
+/*****************************************************************
+Function to printGrid(), with lines around the outside to represent
+boundaries. Prints characters depending on critter type, and counts 
+number of critters of each type in the process. 
+*****************************************************************/
 void World::printGrid(){
 
 	numDoodles = 0;
@@ -134,6 +146,9 @@ void World::printGrid(){
 
 }
 
+/*********************************************************************
+Resets all non-nullptr critters in the Critter*** array before moves are made
+*********************************************************************/
 void World::resetCritters()
 {
 	for (int i=0; i<nRow; i++)
@@ -207,6 +222,10 @@ void World::breedCritters(critterType c)
 	}
 }
 
+/*********************************************************************
+Calls other functions in sequence to run a single iteration of predator/prey
+simulation. 
+*********************************************************************/
 void World::runIter(){
 	resetCritters();
 	moveCritters(DOODLEBUG);
@@ -217,73 +236,16 @@ void World::runIter(){
 	printGrid(); // print after every step
 }
 
+/*********************************************************************
+Moves all critters, and deletes/moves pointers as necessary following moves
+*********************************************************************/
 void World::moveCritters(critterType c){
 	for(int i = 0; i < nRow; i++){
 		for(int j = 0; j < nCol; j++){
 			if(critterSim[i][j] != nullptr){
 				if(critterSim[i][j]->getCritterType() == c && critterSim[i][j]->getMoved() == false){
-					// make spacetypes for possible moves
-					/*spaceType up = OUTOFBOUNDS, down = OUTOFBOUNDS, right = OUTOFBOUNDS, left = OUTOFBOUNDS;
-
-					// set up
-					if(inBounds(i - 1, j) == false){
-						up = OUTOFBOUNDS;
-					}
-					else if(critterSim[i - 1][j] == nullptr && inBounds(i - 1, j) == true){
-						up = EMPTY;
-					}
-					else if(critterSim[i - 1][j]->getCritterType() == DOODLEBUG && inBounds(i - 1, j) == true){
-						up = DOODLEBUG_SPACE;
-					}
-					else if(critterSim[i - 1][j]->getCritterType() == ANT && inBounds(i - 1, j) == true){
-						up = ANT_SPACE;
-					}
-
-					// set down
-					if(inBounds(i + 1, j) == false){
-						down = OUTOFBOUNDS;
-					}
-					else if(critterSim[i + 1][j] == nullptr && inBounds(i + 1, j) == true){
-						down = EMPTY;
-					}
-					else if(critterSim[i + 1][j]->getCritterType() == DOODLEBUG && inBounds(i + 1, j) == true){
-						down = DOODLEBUG_SPACE;
-					}
-					else if(critterSim[i + 1][j]->getCritterType() == ANT && inBounds(i + 1, j) == true){
-						down = ANT_SPACE;
-					}
-
-					// set right
-					if(inBounds(i, j + 1) == false){
-						right = OUTOFBOUNDS;
-					}
-					else if(critterSim[i][j + 1] == nullptr && inBounds(i, j + 1) == true){
-						right = EMPTY;
-					}
-					else if(critterSim[i][j + 1]->getCritterType() == DOODLEBUG && inBounds(i, j + 1) == true){
-						right = DOODLEBUG_SPACE;
-					}
-					else if(critterSim[i][j + 1]->getCritterType() == ANT && inBounds(i, j + 1) == true){
-						right = ANT_SPACE;
-					}
-
-					// set left
-					if(inBounds(i, j - 1) == false){
-						left = OUTOFBOUNDS;
-					}
-					else if(critterSim[i][j - 1] == nullptr && inBounds(i, j - 1) == true){
-						left = EMPTY;
-					}
-					else if(critterSim[i][j - 1]->getCritterType() == DOODLEBUG && inBounds(i, j - 1) == true){
-						left = DOODLEBUG_SPACE;
-					}
-					else if(critterSim[i][j - 1]->getCritterType() == ANT && inBounds(i, j - 1) == true){
-						left = ANT_SPACE;
-					}*/
-
 					setAdjacent(i, j);
 					// check if doodle eats ant, and move spaces
-					//if(critterSim[i][j]->move(up, right, down, left) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
 					if(critterSim[i][j]->move(adjacents) && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY())){
 						if(critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] != nullptr){
 							if(critterSim[i][j]->getCritterType() == DOODLEBUG && critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()]->getCritterType() == ANT){
@@ -300,6 +262,9 @@ void World::moveCritters(critterType c){
 	}
 }
 
+/*********************************************************************
+Runs through entire array and starves all critters as appropriate
+*********************************************************************/
 void World::starveCritters(){
 	for(int i = 0; i < nRow; i++){
 		for(int j = 0; j < nCol; j++){
@@ -311,6 +276,10 @@ void World::starveCritters(){
 	}
 }
 
+/*********************************************************************
+Runs entire simulation, with number of steps provided by user. Prints 
+step numbers as it goes.
+*********************************************************************/
 void World::runSim(int nSteps){
 	printGrid();
 	for(int i = 0; i < nSteps; i++){
@@ -319,6 +288,9 @@ void World::runSim(int nSteps){
 	}
 }
 
+/*********************************************************************
+Checks whether a space is in bounds.
+*********************************************************************/
 bool World::inBounds(int row, int col){
 	if(row >= 0 && row < nRow && col >= 0 && col < nCol){
 		return true;

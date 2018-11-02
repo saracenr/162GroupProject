@@ -6,9 +6,12 @@
 #include <string>
 
 
-// input validation requires two ints, to indicate the allowed range for input
-// the function will prompt a user to enter an int until 
-// an appropriate one is entered
+
+
+/****************************************************************************
+Input validation requires two ints, to indicate the allowed range for input.
+The function will prompt a user to enter an int until a good one is entered
+*****************************************************************************/
 int getInt(int min, int max)
 {
 	std::string retString;

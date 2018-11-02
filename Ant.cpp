@@ -1,6 +1,6 @@
 /*****************************************************************************************
  * Program Name: doodle
- * Authors: Robert Saraceno, Christina Brasco, Russel James,
+ * Authors: Robert Saraceno, Christina Brasco, Russell James,
  * Christopher Gundlach, Amy Stockinger
  * Date: 10/24/2018
  * Class: Ant
@@ -17,8 +17,16 @@
 #include "Ant.hpp"
 #include <iostream>
 
+/*****************************************************************
+Ant constructor, calls Critter constructor
+*****************************************************************/
 Ant::Ant(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, ANT) {}
 
+/*****************************************************************
+Overridden move function for Ant. Randomly chooses a direction, moves if the 
+space is empty, and if move was made returns true. Otherwise, returns false. 
+Always increments steps since breed and sets moved boolean to true.
+*****************************************************************/
 bool Ant::move(vector<spaceType> adjacents) {
 	std::random_device rd;  // Seeds the random number.
 	std::mt19937 gen(rd());
@@ -26,7 +34,7 @@ bool Ant::move(vector<spaceType> adjacents) {
 	int movement;
 	movement = ran(rd);  // Generate the random number.
 
-	if (movement == UP) {  // Checks if space above is empty and moves and increments values.
+	if (movement == UP) {  // Checks if space above is empty, moves/increments values.
 		if (adjacents[0] == EMPTY) {
 			setX(getX() - 1);
 			hasMoved();
@@ -40,7 +48,7 @@ bool Ant::move(vector<spaceType> adjacents) {
 		}
 	}
 
-	if (movement == RIGHT) {  // Checks if space to the right is empty and moves and increments values.
+	else if (movement == RIGHT) {  // Checks if space to the right is empty and moves and increments values.
 		if (adjacents[1] == EMPTY) {
 			setY(getY() + 1);
 			hasMoved();
@@ -54,7 +62,7 @@ bool Ant::move(vector<spaceType> adjacents) {
 		}
 	}
 
-	if (movement == DOWN) {  // Checks if space below is empty and moves and increments values.
+	else if (movement == DOWN) {  // Checks if space below is empty and moves and increments values.
 		if (adjacents[2] == EMPTY) {
 			setX(getX() + 1);
 			hasMoved();
@@ -68,7 +76,7 @@ bool Ant::move(vector<spaceType> adjacents) {
 		}
 	}
 
-	if (movement == LEFT) {  // Checks if space to left is empty and moves and increments values.
+	else if (movement == LEFT) {  // Checks if space to left is empty and moves and increments values.
 		if (adjacents[3] == EMPTY) {
 			setY(getY() - 1);
 			hasMoved();
@@ -105,11 +113,13 @@ direction Ant::breed(vector<spaceType> spaces)
 			retDir = static_cast<direction>(empties[randIndex]);
 			resetBreed();
 		}
-
 	}
 	return retDir;
 }
 
+/*****************************************************************
+Overridden starve function. Since ant can't starve, just returns false.
+*****************************************************************/
 bool Ant::starve() {
 	return false;
 }

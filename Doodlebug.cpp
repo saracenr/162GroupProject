@@ -1,6 +1,6 @@
 /*****************************************************************************************
  * Program Name: doodle
- * Authors: Robert Saraceno, Christina Brasco, Russel James,
+ * Authors: Robert Saraceno, Christina Brasco, Russell James,
  * Christopher Gundlach, Amy Stockinger
  * Date: 10/24/2018
  * Class: Doodlebug
@@ -18,8 +18,18 @@
 #include "Doodlebug.hpp"
 #include <iostream>
 
+/*****************************************************************
+Doodlebug constructor, calls Critter constructor
+*****************************************************************/
 Doodlebug::Doodlebug(int xCoord_, int yCoord_): Critter(xCoord_, yCoord_, DOODLEBUG) {}
 
+/*****************************************************************
+Overridden move function for Doodlebug. First checks to see if there are
+adjacent ants, and eats one if possible, resetting eat counter. 
+Otherwise, andomly chooses a direction, moves if the space is empty. 
+If a move was made returns true. Otherwise, returns false. 
+Always increments steps since breed and sets moved boolean to true.
+*****************************************************************/
 bool Doodlebug::move(vector<spaceType> adjacents) {
 
 	bool nearbyAnt = false;
@@ -173,6 +183,9 @@ direction Doodlebug::breed(vector<spaceType> spaces) //WIP
 	return retDir;
 }
 
+/*****************************************************************
+Overridden starve function. Returns true if doodlebug hasn't eaten in 3 steps.
+*****************************************************************/
 bool Doodlebug::starve()  //WIP
 {
 	if (getEat()>=3)
