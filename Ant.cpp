@@ -1,4 +1,18 @@
-
+/*****************************************************************************************
+ * Program Name: doodle
+ * Authors: Robert Saraceno, Christina Brasco, Russel James,
+ * Christopher Gundlach, Amy Stockinger
+ * Date: 10/24/2018
+ * Class: Ant
+ *
+ * Arguments: Constructor takes (int xCoordinate, int yCoordinate)
+ *
+ * Description: This class represents the ant for the simulation.  It has all the
+ * member variables from critter.  It has a move function that takes a vector with
+ * the spaceType of each adjacent space relative to its location (up[0], right[1], down[2], left[3]).
+ * Also a breed function that will return a random empty adjacent space if possible for
+ * a new ant to be created.
+ *******************************************************************************************/
 #include <random>
 #include "Ant.hpp"
 #include <iostream>
@@ -68,70 +82,6 @@ bool Ant::move(vector<spaceType> adjacents) {
 		}
 	}
 }
-
-/*bool Ant::move(spaceType up, spaceType right, spaceType down, spaceType left) {
-	std::random_device rd;  // Seeds the random number.
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> ran(0, 3); //  Random number from 0 to 3. (up[0], right[1], down[2], left[3])
-	int movement;
-	movement = ran(rd);  // Generate the random number.
-
-	if (movement == UP) {  // Checks if space above is empty and moves and increments values.
-		if (up == EMPTY) {
-			setX(getX() - 1);
-			hasMoved();
-			incBreed();
-			return true;
-		}
-		else {
-			hasMoved();
-			incBreed();
-			return false;
-		}
-	}
-
-	if (movement == RIGHT) {  // Checks if space to the right is empty and moves and increments values.
-		if (right == EMPTY) {
-			setY(getY() + 1);
-			hasMoved();
-			incBreed();
-			return true;
-		}
-		else {
-			hasMoved();
-			incBreed();
-			return false;
-		}
-	}
-
-	if (movement == DOWN) {  // Checks if space below is empty and moves and increments values.
-		if (down == EMPTY) {
-			setX(getX() + 1);
-			hasMoved();
-			incBreed();
-			return true;
-		}
-		else {
-			hasMoved();
-			incBreed();
-			return false;
-		}
-	}
-
-	if (movement == LEFT) {  // Checks if space to left is empty and moves and increments values.
-		if (left == EMPTY) {
-			setY(getY() - 1);
-			hasMoved();
-			incBreed();
-			return true;
-		}
-		else {
-			hasMoved();
-			incBreed();
-			return false;
-		}
-	}
-}*/
 
 /*****************************************************************
 Create new ant in an open adjacent space, if space exists.

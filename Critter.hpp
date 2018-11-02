@@ -1,4 +1,18 @@
-
+/*****************************************************************************************
+ * Program Name: doodle
+ * Authors: Robert Saraceno, Christina Brasco, Russel James,
+ * Christopher Gundlach, Amy Stockinger
+ * Date: 10/24/2018
+ * Class: Critter
+ *
+ * Arguments: Constructor takes (int xCoordinate, int yCoordinate, critterType bugType)
+ * Member variables: xCoord, yCoord, bugType, hasMovedThisTurn, stepsSinceEat, stepsSinceBreed
+ *
+ * Description: This class is the base critter class for the simulation.
+ * It has virtual move, breed and starve functions for derived classes to define.
+ * With getters and setters for each member variable.  As well as resetting and incrementing
+ * functions for the counting steps variables.
+ *******************************************************************************************/
 #ifndef CRITTER_HPP
 #define CRITTER_HPP
 #include <vector>

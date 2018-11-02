@@ -284,7 +284,7 @@ void World::moveCritters(critterType c){
 					setAdjacent(i, j);
 					// check if doodle eats ant, and move spaces
 					//if(critterSim[i][j]->move(up, right, down, left) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
-					if(critterSim[i][j]->move(adjacents) == true && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY()) == true){
+					if(critterSim[i][j]->move(adjacents) && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY())){
 						if(critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] != nullptr){
 							if(critterSim[i][j]->getCritterType() == DOODLEBUG && critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()]->getCritterType() == ANT){
 								delete critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()];
@@ -303,7 +303,7 @@ void World::moveCritters(critterType c){
 void World::starveCritters(){
 	for(int i = 0; i < nRow; i++){
 		for(int j = 0; j < nCol; j++){
-			if(critterSim[i][j] != nullptr && critterSim[i][j]->starve() == true){
+			if(critterSim[i][j] != nullptr && critterSim[i][j]->starve()){
 				delete critterSim[i][j];
 				critterSim[i][j] = nullptr;
 			}
