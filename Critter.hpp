@@ -1,18 +1,20 @@
-/*****************************************************************************************
+/******************************************************************************
  * Program Name: doodle
  * Authors: Robert Saraceno, Christina Brasco, Russell James,
  * Christopher Gundlach, Amy Stockinger
  * Date: 10/24/2018
  * Class: Critter
  *
- * Arguments: Constructor takes (int xCoordinate, int yCoordinate, critterType bugType)
- * Member variables: xCoord, yCoord, bugType, hasMovedThisTurn, stepsSinceEat, stepsSinceBreed
+ * Arguments: Constructor takes (int xCoordinate, int yCoordinate, 
+ * critterType bugType)
+ * Member variables: xCoord, yCoord, bugType, hasMovedThisTurn, stepsSinceEat, 
+ * stepsSinceBreed
  *
  * Description: This class is the base critter class for the simulation.
- * It has virtual move, breed and starve functions for derived classes to define.
- * With getters and setters for each member variable.  As well as resetting and incrementing
- * functions for the counting steps variables.
- *******************************************************************************************/
+ * It has virtual move, breed and starve functions for derived classes to 
+ * define. With getters and setters for each member variable.  As well as 
+ * resetting and incrementing functions for the counting steps variables.
+ *****************************************************************************/
 #ifndef CRITTER_HPP
 #define CRITTER_HPP
 #include <vector>
@@ -39,7 +41,6 @@ public:
     void resetEat();  //  Sets stepsSinceEat to 0.
     critterType getCritterType();
     virtual direction breed(vector<spaceType>)=0;
-    //virtual bool move(spaceType, spaceType, spaceType, spaceType) = 0;
     virtual bool move(vector<spaceType>) = 0;
     virtual bool starve()= 0;
     virtual ~Critter(){};

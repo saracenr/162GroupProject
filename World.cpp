@@ -1,3 +1,21 @@
+/*****************************************************************************
+ * Program Name: doodle
+ * Authors: Robert Saraceno, Christina Brasco, Russell James,
+ * Christopher Gundlach, Amy Stockinger
+ * Date: 11/4/2018
+ * Class: World
+ *
+ * Arguments: Constructor takes (int numRow, numCol, numAnts, numDoodles)
+ *
+ * Description: This class represents the world for the predator/prey
+ * simulation. It contains a constructor and destructor, which appropriately 
+ * handle the allocation and deallocation of the Critter*** pointer which is 
+ * the basis of the simulation. It also contains functions which move or breed
+ * all critters of a certain type, reset all the critters, print the board, 
+ * and fill adjacent squares. 
+ *****************************************************************************/
+
+
 #include "World.hpp"
 #include <iostream>
 
@@ -15,11 +33,12 @@ World::World(int nr, int nc, int na, int nd)
 	numAnts=na;
 	numDoodles=nd;
 
-	//initialize all out of bounds
+	//initialize all out of bounds vector elements
 	for (int i = 0; i < 4; i++) {
 		adjacents.push_back(OUTOFBOUNDS);
 	}
 
+	// initialize empty Critter*** with nullptrs
 	critterSim = new Critter**[nRow];
 	for (int i=0; i<nRow; i++)
 	{	
@@ -30,7 +49,7 @@ World::World(int nr, int nc, int na, int nd)
 		}
 	}
 
-
+	// randomly place ants
 	int randRow, randCol;
 	for (int i=0; i<numAnts; i++)
 	{
@@ -47,7 +66,7 @@ World::World(int nr, int nc, int na, int nd)
 		critterSim[randRow][randCol]=new Ant(randRow, randCol);
 	}
 
-
+	// randomly place doodlebugs
 	for (int i=0; i<numDoodles; i++)
 	{
 		randRow=(rand()%nRow);
@@ -71,6 +90,8 @@ Critter*** object, to prevent memory leaks.
 *****************************************************************/
 World::~World()
 {
+	// for every element of critterSim, deallocate dynamically allocated
+	// critters if they're not nullptrs
 	for (int i=0; i<nRow; i++)
 	{
 		for (int j=0; j<nCol; j++)
@@ -82,6 +103,7 @@ World::~World()
 		}
 	}
 
+	// deallocate array
 	for (int i=0; i<nRow; i++)
 	{
 		delete [] critterSim[i];
@@ -140,7 +162,8 @@ void World::printGrid(){
 		std::cout<<"-";
 	}
 	std::cout<<std::endl;
-	std::cout << "Doodlebugs: " << numDoodles << "   " << "Ants: " << numAnts << std::endl;
+	std::cout << "Doodlebugs: " << numDoodles << "   " 
+				<< "Ants: " << numAnts << std::endl;
 
 	return;
 
@@ -161,7 +184,6 @@ void World::resetCritters()
 			}
 		}
 	}
-
 	return;
 }
 
@@ -177,9 +199,9 @@ void World::breedCritters(critterType c)
 			//Filter for Doodlebugs
 			if (c == DOODLEBUG) {
 				if (critterSim[i][j] != nullptr) {
-					if (critterSim[i][j]->getCritterType() == DOODLEBUG) { //team Arrow!! ;)
+					if (critterSim[i][j]->getCritterType() == DOODLEBUG) { 
 						setAdjacent(i, j);
-						breedDir = critterSim[i][j]->breed(adjacents); //RJ  will pick up here later
+						breedDir = critterSim[i][j]->breed(adjacents); 
 						//place new doodle according to returned breed direction
 						if (breedDir == UP) {
 							critterSim[i - 1][j] = new Doodlebug(i - 1, j);
@@ -240,22 +262,35 @@ void World::runIter(){
 Moves all critters, and deletes/moves pointers as necessary following moves
 *********************************************************************/
 void World::moveCritters(critterType c){
-	for(int i = 0; i < nRow; i++){
-		for(int j = 0; j < nCol; j++){
-			if(critterSim[i][j] != nullptr){
-				if(critterSim[i][j]->getCritterType() == c && critterSim[i][j]->getMoved() == false){
-					setAdjacent(i, j);
-					// check if doodle eats ant, and move spaces
-					if(critterSim[i][j]->move(adjacents) && inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY())){
-						if(critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] != nullptr){
-							if(critterSim[i][j]->getCritterType() == DOODLEBUG && critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()]->getCritterType() == ANT){
-								delete critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()];
-								critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] = nullptr;
-							}
-						}
-						critterSim[critterSim[i][j]->getX()][critterSim[i][j]->getY()] = critterSim[i][j];
-						critterSim[i][j] = nullptr;
+	for (int i = 0; i < nRow; i++){
+		for (int j = 0; j < nCol; j++){
+			// check that critter is allocated, is correct type, hasn't moved
+			if(critterSim[i][j] != nullptr && 
+			critterSim[i][j]->getCritterType() == c 
+			&& critterSim[i][j]->getMoved() == false){
+				setAdjacent(i, j);
+
+				// check if a move was made, and whether the critter in bounds
+				if(critterSim[i][j]->move(adjacents) && 
+				inBounds(critterSim[i][j]->getX(), critterSim[i][j]->getY())){
+					// if the critter is a doodlebug, and it moves to ANT
+					if(critterSim[critterSim[i][j]->getX()]
+						[critterSim[i][j]->getY()] != nullptr 
+					&& critterSim[i][j]->getCritterType() == DOODLEBUG 
+					&& critterSim[critterSim[i][j]->getX()]
+						[critterSim[i][j]->getY()]->getCritterType() == ANT){
+
+						// "kill" the Ant, set to nullptr
+						delete critterSim[critterSim[i][j]->getX()]
+								[critterSim[i][j]->getY()];
+						critterSim[critterSim[i][j]->getX()]
+								[critterSim[i][j]->getY()] = nullptr;
+
 					}
+					// move critter if it has moved
+					critterSim[critterSim[i][j]->getX()]
+							[critterSim[i][j]->getY()] = critterSim[i][j];
+					critterSim[i][j] = nullptr;
 				}
 			}
 		}
@@ -283,6 +318,7 @@ step numbers as it goes.
 void World::runSim(int nSteps){
 	printGrid();
 	for(int i = 0; i < nSteps; i++){
+		std::cout<<"\n--------------------------------------\n";
 		std::cout << "Step: " << i+1 << std::endl;
 		runIter();
 	}
@@ -308,12 +344,12 @@ void World::setAdjacent(int rowIn, int colIn)
 {
 	critterType type;
 	//fill adjacent vector with status of adjacent spaces
-	//above
-	if (rowIn - 1 < 0) {
+	// check space above
+	if (rowIn - 1 < 0) { // if out of bounds, set out of bounds
 		adjacents[0] = OUTOFBOUNDS;
 	}
 	else if (critterSim[rowIn - 1][colIn] == nullptr) {
-		adjacents[0] = EMPTY;
+		adjacents[0] = EMPTY; 
 	}
 	else if (critterSim[rowIn - 1][colIn] != nullptr) {
 		type = critterSim[rowIn - 1][colIn]->getCritterType();
@@ -324,8 +360,8 @@ void World::setAdjacent(int rowIn, int colIn)
 			adjacents[0] = DOODLEBUG_SPACE;
 		}
 	}
-	//right
-	if (colIn + 1 > nCol - 1) {
+	// check space to the right
+	if (colIn + 1 > nCol - 1) { // if out of bounds, set out of bounds
 		adjacents[1] = OUTOFBOUNDS;
 	}
 	else if (critterSim[rowIn][colIn + 1] == nullptr) {
@@ -340,8 +376,8 @@ void World::setAdjacent(int rowIn, int colIn)
 			adjacents[1] = DOODLEBUG_SPACE;
 		}
 	}
-	//below
-	if (rowIn + 1 > nRow - 1) {
+	//check space below
+	if (rowIn + 1 > nRow - 1) {  // if out of bounds, set out of bounds
 		adjacents[2] = OUTOFBOUNDS;
 	}
 	else if (critterSim[rowIn + 1][colIn] == nullptr) {
@@ -356,8 +392,8 @@ void World::setAdjacent(int rowIn, int colIn)
 			adjacents[2] = DOODLEBUG_SPACE;
 		}
 	}
-	//left
-	if (colIn - 1 < 0) {
+	//check space to the left
+	if (colIn - 1 < 0) {  // if out of bounds, set out of bounds
 		adjacents[3] = OUTOFBOUNDS;
 	}
 	else if (critterSim[rowIn][colIn - 1] == nullptr) {

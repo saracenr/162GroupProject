@@ -21,7 +21,8 @@ void menu()
 	int menuChoice = 0;
 	bool menuRepeater = true;
 
-	std::cout << "To the grader. We did the extra credit. No beating around the bush here." << std::endl;
+	std::cout << "To the grader. We did the extra credit. "
+					<<"No beating around the bush here." << std::endl;
 
 	std::cout << "Welcome to our game. Would you like to play?" << "\n";
 	std::cout << "1. Play the game" << "\n";
@@ -32,19 +33,24 @@ void menu()
 	{
 		if (menuChoice == 1)
 		{
-			std::cout << "Please select a number of grid rows between 2 and 100 for the critters." << std::endl;
+			std::cout << "Please select a number of grid rows between "
+						<<"2 and 100 for the critters.\n";
 			numRow = getInt(2, 100);
 
-			std::cout << "Please select a number of grid columns between 2 and 80 for the critters." << std::endl;
+			std::cout << "Please select a number of grid columns between "
+						<<"2 and 80 for the critters.\n";
 			numCol = getInt(2, 80);
 
-			std::cout << "Please select a number between 0 and " << numRow * numCol << " of ants." << std::endl;
+			std::cout << "Please select a number between 0 and " 
+						<< numRow * numCol << " of ants.\n";
 			numAnt = getInt(0, numRow * numCol);
 
-			std::cout << "Please select a number between 0 and " << numRow * numCol - numAnt << " of doodlebugs." << std::endl;
+			std::cout << "Please select a number between 0 and " 
+						<< numRow * numCol - numAnt << " of doodlebugs.\n";
 			numDoodle = getInt(0, numRow * numCol - numAnt);
 
-			std::cout << "And finally, please select a number of steps between 2 and 200 for the program to run through." << std::endl;
+			std::cout << "And finally, please select a number of steps between"
+						<<" 2 and 200 for the program to run through.\n";
 			numSteps = getInt(2, 200);
 
 			World w(numRow, numCol, numAnt, numDoodle);
